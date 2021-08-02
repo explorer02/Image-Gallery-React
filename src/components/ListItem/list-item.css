@@ -1,0 +1,41 @@
+.list-item {
+  display: flex;
+  width: 100%;
+  border: 1px solid #000000;
+  border-radius: 10px;
+  padding: 1rem;
+  gap: 20px;
+  height: 8rem;
+  background-color: #eee;
+  /* overflow: hidden; */
+}
+
+.list-item > img {
+  align-self: center;
+  border-radius: 10px;
+  border: 1px solid #000000;
+  flex: 0 0 30%;
+  max-width: 5rem;
+}
+.list-item:hover {
+  background: rgba(0, 255, 0, 0.1);
+}
+
+.list-item-content {
+  flex: 1 1 auto;
+}
+.list-item-content > p {
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.selected {
+  background: rgba(0, 255, 0, 0.3);
+}
+.selected:hover {
+  background: rgba(0, 0, 255, 0.1);
+}
+
+.list-item.hovered {
+  box-shadow: 0px 10px 5px rgba(0, 0, 0, 0.3);
+}
