@@ -4,12 +4,17 @@ import { useEffect, useState } from "react";
 import Listview from "./container/ListView/Listview";
 import CanvasView from "./container/CanvasView/CanvasView";
 
+function getIndex(data, id) {
+  return data.findIndex((e) => e.id === id);
+}
+
 function App() {
   const [data, setData] = useState(fetchData);
   const [currentIndex, setCurrentIndex] = useState(0);
   let currentDragged = null;
   let currentDropped = null;
-  console.log(data);
+
+  // console.log(data);
 
   const onSubmithandler = ({ title, description }) => {
     const newData = [...data];
@@ -18,8 +23,8 @@ function App() {
     setData(newData);
   };
   //select list item
-  const onSelectListItem = (index) => {
-    setCurrentIndex(index);
+  const onSelectListItem = (id) => {
+    setCurrentIndex(getIndex(data, id));
   };
   //add keyboard navigation using arrow keys
   useEffect(() => {
@@ -39,10 +44,10 @@ function App() {
   }, [currentIndex, data.length]);
 
   const startDragnDrop = (id) => {
-    currentDragged = id;
+    currentDragged = getIndex(data, id);
   };
   const finishDragnDrop = (id) => {
-    currentDropped = id;
+    currentDropped = getIndex(data, id);
     if (currentDragged !== null && currentDropped !== null) {
       console.log(currentDragged, currentDropped);
       const newData = [...data];

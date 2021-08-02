@@ -17,8 +17,7 @@ const Listview = ({
     ];
     const item = elements.find((e) => e && e.classList.contains("list-item"));
     if (item) {
-      const index = parseInt(item.dataset.id);
-      if (index !== undefined) onSelectListItem(index);
+      onSelectListItem(item.dataset.id);
     }
   };
   return (
@@ -27,7 +26,6 @@ const Listview = ({
         <ListItem
           {...d}
           key={d.id}
-          id={i}
           selected={i === currentIndex}
           onStartDrag={onStartDrag}
           onStopDrag={onStopDrag}

@@ -1,14 +1,14 @@
 export function fetchData() {
   return [
     {
-      id: Math.random().toString(),
+      id: Math.random().toString().substring(0, 5),
       title: "Cat",
       description:
         "I am a monster cat (Weaown Waeown). Don't come near me. I will not bite you but will roast your insecurities. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce elit velit, convallis id consectetur ut, varius et diam. Nam lacus orci, elementum et bibendum ultricies, tincidunt nec lectus. Duis blandit et mi in sodales. Fusce nec purus porttitor, pharetra mi a, accumsan nisi. Integer neque urna, cursus sed ex id, auctor vehicula mi. Donec ac finibus magna. Proin sollicitudin erat sit amet orci tincidunt, facilisis lacinia dolor ornare.",
       imageURL: "/images/cat.jpeg",
     },
     {
-      id: Math.random().toString(),
+      id: Math.random().toString().substring(0, 5),
 
       title: "Dog",
       description:
@@ -16,7 +16,7 @@ export function fetchData() {
       imageURL: "/images/dog.jpeg",
     },
     {
-      id: Math.random().toString(),
+      id: Math.random().toString().substring(0, 5),
 
       title: "Horse",
       description:
@@ -24,7 +24,7 @@ export function fetchData() {
       imageURL: "/images/horse.webp",
     },
     {
-      id: Math.random().toString(),
+      id: Math.random().toString().substring(0, 5),
 
       title: "Cata",
       description:
@@ -32,7 +32,7 @@ export function fetchData() {
       imageURL: "images/cat.jpeg",
     },
     {
-      id: Math.random().toString(),
+      id: Math.random().toString().substring(0, 5),
 
       title: "Dogi",
       description:
@@ -40,7 +40,7 @@ export function fetchData() {
       imageURL: "images/dog.jpeg",
     },
     {
-      id: Math.random().toString(),
+      id: Math.random().toString().substring(0, 5),
 
       title: "Horsea",
       description:
