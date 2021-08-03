@@ -4,7 +4,6 @@ import ImageDisplay from "../../components/ImageDisplay/ImageDisplay";
 import "./canvas-view.css";
 
 const CanvasView = ({ data, onSubmit }) => {
-  console.log(data);
   return (
     <div className="canvas-container">
       <ImageDisplay imageURL={data.imageURL} />

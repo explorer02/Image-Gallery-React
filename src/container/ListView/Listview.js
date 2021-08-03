@@ -9,7 +9,8 @@ const Listview = ({
   onStartDrag,
   onStopDrag,
 }) => {
-  const onClickHandler = (ev) => {
+  //find list item which was clicked
+  const handleClick = (ev) => {
     const elements = [
       ev.target,
       ev.target?.parentNode,
@@ -20,8 +21,9 @@ const Listview = ({
       onSelectListItem(item.dataset.id);
     }
   };
+
   return (
-    <div className="list-container" onClick={onClickHandler}>
+    <div className="list-container" onClick={handleClick}>
       {dataList.map((d, i) => (
         <ListItem
           {...d}

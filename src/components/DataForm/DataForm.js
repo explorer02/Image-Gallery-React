@@ -10,20 +10,23 @@ const DataForm = ({
   const [description, setDescription, descriptionChangeHandler] =
     useInput(initDescription);
 
+  //reset form data on clicking new list item
   useEffect(() => {
     setTitle(initTitle);
   }, [initTitle, setTitle]);
+
   useEffect(() => {
     setDescription(initDescription);
   }, [initDescription, setDescription]);
 
-  const onSubmithandler = (ev) => {
+  //submit form
+  const handleSubmit = (ev) => {
     ev.preventDefault();
     onSubmit({ title, description });
   };
 
   return (
-    <form className="data-form" onSubmit={onSubmithandler}>
+    <form className="data-form" onSubmit={handleSubmit}>
       <input
         type="text"
         placeholder="Title"
@@ -46,9 +49,10 @@ const DataForm = ({
   );
 };
 
+//custom hook for controlling input
 const useInput = (initValue) => {
   const [data, setData] = useState(initValue);
-  const onChange = useCallback((ev) => setData(ev.target.value), []);
-  return [data, setData, onChange];
+  const changeHandler = useCallback((ev) => setData(ev.target.value), []);
+  return [data, setData, changeHandler];
 };
 export default DataForm;

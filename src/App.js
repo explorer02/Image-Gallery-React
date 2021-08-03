@@ -1,74 +1,89 @@
 import "./App.css";
 import { fetchData } from "./server";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Listview from "./container/ListView/Listview";
 import CanvasView from "./container/CanvasView/CanvasView";
 
+//find index of element in array
 function getIndex(data, id) {
   return data.findIndex((e) => e.id === id);
 }
 
 function App() {
   const [data, setData] = useState(fetchData);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  let currentDragged = null;
-  let currentDropped = null;
+  const [currentIndex, setCurrentIndex] = useState(0); //current selected item
+  let currentDragged = useRef(); //current item dragged
+  let currentDropped = useRef(); //current item on which dragged item is dropped
 
-  // console.log(data);
+  //update data from form
+  const handleSubmit = useCallback(
+    ({ title, description }) => {
+      const newData = [...data];
+      newData[currentIndex].title = title;
+      newData[currentIndex].description = description;
+      setData(newData);
+    },
+    [currentIndex, data]
+  );
 
-  const onSubmithandler = ({ title, description }) => {
-    const newData = [...data];
-    newData[currentIndex].title = title;
-    newData[currentIndex].description = description;
-    setData(newData);
-  };
   //select list item
-  const onSelectListItem = (id) => {
+  const handleSelectListItem = (id) => {
     setCurrentIndex(getIndex(data, id));
   };
-  //add keyboard navigation using arrow keys
+  //keyboard navigation
   useEffect(() => {
+    //add keyboard navigation using arrow keys
     const keyboardNavigation = (ev) => {
       if (ev.key === "ArrowDown") {
         ev.preventDefault();
-        setCurrentIndex((currentIndex + 1) % data.length);
+        setCurrentIndex((c) => (c + 1) % data.length);
       } else if (ev.key === "ArrowUp") {
         ev.preventDefault();
-        setCurrentIndex((currentIndex - 1 + data.length) % data.length);
+        setCurrentIndex((c) => (c - 1 + data.length) % data.length);
       }
     };
     window.addEventListener("keydown", keyboardNavigation);
     return () => {
+      //remove listener on cleanup
       window.removeEventListener("keydown", keyboardNavigation);
     };
-  }, [currentIndex, data.length]);
+  }, [data.length]);
 
-  const startDragnDrop = (id) => {
-    currentDragged = getIndex(data, id);
-  };
-  const finishDragnDrop = (id) => {
-    currentDropped = getIndex(data, id);
-    if (currentDragged !== null && currentDropped !== null) {
-      console.log(currentDragged, currentDropped);
-      const newData = [...data];
-      const [item] = newData.splice(currentDragged, 1);
-      newData.splice(currentDropped, 0, item);
+  //start drag and drop by setting dragged box
+  const startDragnDrop = useCallback(
+    (id) => {
+      currentDragged.current = getIndex(data, id);
+    },
+    [data]
+  );
 
-      setData(newData);
-      setCurrentIndex(currentDropped);
-    }
-  };
+  //finish drag and drop by reordering data
+  const finishDragnDrop = useCallback(
+    (id) => {
+      currentDropped.current = getIndex(data, id);
+      if (currentDragged.current !== null && currentDropped.current !== null) {
+        const newData = [...data];
+        const [item] = newData.splice(currentDragged.current, 1);
+        newData.splice(currentDropped.current, 0, item);
+        setData(newData);
+        setCurrentIndex(currentDropped.current);
+        currentDropped.current = null;
+        currentDragged.current = null;
+      }
+    },
+    [data]
+  );
 
   return (
     <div className="App">
       <Listview
         dataList={data}
-        onSelectListItem={onSelectListItem}
+        onSelectListItem={handleSelectListItem}
         currentIndex={currentIndex}
         onStartDrag={startDragnDrop}
         onStopDrag={finishDragnDrop}
       />
-      <CanvasView data={data[currentIndex]} onSubmit={onSubmithandler} />
+      <CanvasView data={data[currentIndex]} onSubmit={handleSubmit} />
     </div>
   );
 }
