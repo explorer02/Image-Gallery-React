@@ -18,7 +18,6 @@ const ListItem = ({
 
   useEffect(() => {
     binarySearch(contentRef.current, "60px", "100%", description);
-    console.log("binary search for", id);
   }, [id, description]);
 
   useEffect(() => {

@@ -11,7 +11,6 @@ export function binarySearch(div, maxHeight, width, content) {
   div.style.width = width;
   div.style.maxHeight = maxHeight;
   maxHeight = parseInt(maxHeight);
-  div.style.border = "1px solid black";
   let start = 0,
     end = content.length;
   let answer = start;
