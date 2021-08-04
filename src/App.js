@@ -34,6 +34,7 @@ function App() {
   useEffect(() => {
     //add keyboard navigation using arrow keys
     const keyboardNavigation = (ev) => {
+      if (ev.target.type === "text" || ev.target.type === "textarea") return;
       if (ev.key === "ArrowDown") {
         ev.preventDefault();
         setCurrentIndex((c) => (c + 1) % data.length);

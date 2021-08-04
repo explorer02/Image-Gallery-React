@@ -1,3 +1,11 @@
+:root {
+  --color-primary: #06f;
+  --color-secondary: #fff;
+  --color-background: #fcfcfc;
+  --color-shadow: #06f6;
+  --color-border: #000;
+  --border-style: 1px solid var(--color-border);
+}
 * {
   box-sizing: border-box;
   margin: 0;
@@ -12,7 +20,7 @@ body {
 
 body {
   font-family: sans-serif;
-  background: linear-gradient(#ff000033, rgba(0, 0, 255, 0.2));
+  background: var(--color-background);
   background-repeat: no-repeat;
 }
 #root {

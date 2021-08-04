@@ -11,23 +11,24 @@
   font-size: inherit;
   padding: 0.5rem;
   border-radius: 10px;
-  border: 1px solid black;
+  border: var(--border-style);
   outline: none;
 }
 .data-form > input {
   width: 40%;
-  color: red;
+  color: var(--color-primary);
 }
 
 .data-form > textarea {
   width: 70%;
   max-lines: 8;
-  color: blue;
+  color: var(--color-primary);
 }
 .data-form > button {
   width: 25%;
-  color: white;
-  background: #00aa00;
+  color: var(--color-secondary);
+  background: var(--color-primary);
+
   min-width: min-content;
 }
 .data-form > button:hover {
